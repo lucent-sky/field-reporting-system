@@ -2,11 +2,12 @@ package com.example.fieldreporting.dto;
 
 import com.example.fieldreporting.model.Report;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SyncResponse {
-    private List<Report> accepted;
-    private List<Report> conflicts;
+    private List<Report> accepted = new ArrayList<>();
+    private List<Report> conflicts = new ArrayList<>();
 
     public List<Report> getAccepted() {
         return accepted;
