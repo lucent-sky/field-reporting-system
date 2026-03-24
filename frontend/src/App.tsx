@@ -10,6 +10,7 @@ function App() {
   const [description, setDescription] = useState("");
   const [conflicts, setConflicts] = useState<Report[]>([]);
   const [editing, setEditing] = useState<Report | null>(null);
+  const [status, setStatus] = useState("OPEN");
 
   const saveReport = () => {
     if (editing) {
@@ -17,6 +18,7 @@ function App() {
         ...editing,
         title,
         description,
+        status,
         version: editing.version, // keep version (important!)
         lastUpdated: new Date().toISOString(),
       };
@@ -33,7 +35,7 @@ function App() {
         id: uuidv4(),
         title,
         description,
-        status: "OPEN",
+        status,
         version: 1,
         lastUpdated: new Date().toISOString(),
       };
@@ -75,6 +77,7 @@ function App() {
     setEditing(report);
     setTitle(report.title);
     setDescription(report.description);
+    setStatus(report.status); 
   };
 
   return (
@@ -93,6 +96,13 @@ function App() {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       />
+      <br /><br />
+
+      <select value={status} onChange={(e) => setStatus(e.target.value)}>
+        <option value="OPEN">OPEN</option>
+        <option value="IN_PROGRESS">IN_PROGRESS</option>
+        <option value="CLOSED">CLOSED</option>
+      </select>
       <br /><br />
 
       <button onClick={saveReport}>
